@@ -1,6 +1,6 @@
 import pytest
 
-from americano import parse
+from americano import parse, ParseError
 
 
 """
@@ -43,6 +43,7 @@ test_eval_parameters = [
     ['"A" + var', 'Anull', {'var': None}],
     ['"A" + 1', 'A1'],
     ['"A" + true', 'Atrue'],
+    ['"A" + false', 'Afalse'],
     ['1 + true', 2],
     ['1 + false', 1],
     ['true + false', 1],
@@ -53,6 +54,7 @@ test_eval_parameters = [
     ['3 - 1.2', 1.8],
     ['3.4 - 2.2', 1.2],
     ['"2" - 1', 1],
+    ['"2.5" - 1', 1.5],
     ['2 * 3', 6],
     ['2.1 * 3', 6.3],
     ['2.1 * 3.5', 7.35],
@@ -128,6 +130,7 @@ test_eval_parameters = [
     ['null == 1', False],
     ['"A" == "A"', True],
     ['"A" == "B"', False],
+    ['"A" == 1', False],
     ['1 !== 1', False],
     ['1 !== 2', True],
     ['1 !== "1"', True],
@@ -198,3 +201,8 @@ def test_eval(expression, expected, context):
     p = parse(expression)
     result = p.eval(context)
     assert result == expected
+
+
+def test_no_nud():
+    with pytest.raises(ParseError):
+        parse('?')
