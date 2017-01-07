@@ -1,0 +1,8 @@
+dependencies:
+  override:
+    - pip install -r requirements/test.txt
+
+
+test:
+  override:
+    - pytest tests.py
