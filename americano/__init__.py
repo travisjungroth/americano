@@ -89,10 +89,8 @@ def js_number(val):
     elif isinstance(val, basestring):
         if val.isdigit():
             return int(val)
-        try:
+        else:
             return float(val)
-        except ValueError:
-            pass
     else:
         return val
 
@@ -152,7 +150,7 @@ class BaseNode(object):
 
     @abstractmethod
     def eval(self, context):
-        pass
+        raise NotImplementedError
 
 
 class LiteralNode(BaseNode):
