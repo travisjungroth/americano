@@ -4,6 +4,7 @@ from datetime import date
 from numbers import Number
 from operator import ge, gt, le, lt
 import re
+from six import string_types
 
 
 def parse(expression, global_context=None):
@@ -59,7 +60,7 @@ def js_number(val):
         return 0
     elif val is True:
         return 1
-    elif isinstance(val, basestring):
+    elif isinstance(val, string_types):
         if val.isdigit():
             return int(val)
         else:
@@ -69,7 +70,7 @@ def js_number(val):
 
 
 def add(left, right):
-    if isinstance(left, basestring) or isinstance(right, basestring):
+    if isinstance(left, string_types) or isinstance(right, string_types):
         return js_string(left) + js_string(right)
     else:
         return js_number(left) + js_number(right)
@@ -104,7 +105,7 @@ def loose_not_equal(left, right):
 
 def strict_equal(left, right):
     same_type = type(left) is type(right)
-    both_strings = all((isinstance(value, basestring) for value in [left, right]))
+    both_strings = all((isinstance(value, string_types) for value in [left, right]))
     both_numbers = all((isinstance(value, Number) and not isinstance(value, bool) for value in [left, right]))
     return (same_type or both_numbers or both_strings) and left == right
 
@@ -270,7 +271,7 @@ class RootNode(BaseNode):
             return self.child_node.eval(merged_context)
         except Exception as e:
             raise EvaluationError('Error evaluating expression {} with context {}: {}'.format(
-                self.expression_text, repr(context), e.message), e)
+                self.expression_text, repr(context), str(e)), e)
 
 
 # Tokens:
@@ -468,7 +469,7 @@ class Parser(object):
     def __init__(self, expression):
         self.expression_text = expression
         self.token_itr = self.tokenize(expression)
-        self.token = self.token_itr.next()
+        self.token = next(self.token_itr)
 
     def root(self, global_context):
         try:
@@ -505,17 +506,17 @@ class Parser(object):
 
     def expression(self, rbp):
         t = self.token
-        self.token = self.token_itr.next()
+        self.token = next(self.token_itr)
         left = t.nud()
         while rbp < self.token.lbp:
             t = self.token
-            self.token = self.token_itr.next()
+            self.token = next(self.token_itr)
             left = t.led(left)
         return left
 
     def advance(self, expected):
         t = self.token
-        self.token = self.token_itr.next()
+        self.token = next(self.token_itr)
         if t.text != expected:
             raise RuntimeError('Expected {}'.format(expected))
 

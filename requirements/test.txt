@@ -1,3 +1,4 @@
+-r base.txt
 coverage == 4.3.1
 coveralls == 1.1
 prospector == 0.12.4
