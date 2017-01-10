@@ -3,7 +3,7 @@ dependencies:
     - pip install -r requirements/test.txt
 test:
   override:
-    - pytest tests.py
+    - pytest
   post:
-    - py.test --cov=americano tests.py
+    - py.test --cov=americano
     - coveralls
