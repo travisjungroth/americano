@@ -11,3 +11,8 @@ __pycache__/
 # Test
 .cache
 .coverage
+.tox
+
+# Distribution / packaging
+*.egg-info/
+
