@@ -1,6 +1,6 @@
 dependencies:
   override:
-    - pip install -r requirements/test.txt
+    - pip install -r requirements/ci.txt
     - pyenv local 2.7.12 3.5.2
 test:
   override:
