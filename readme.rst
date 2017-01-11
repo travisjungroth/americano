@@ -2,7 +2,7 @@ Americano
 =========
 
 .. image:: https://circleci.com/gh/travisjungroth/americano/tree/master.svg?style=shield&circle-token=190bfe13ebf014f2598880d1369a802ebe8dda70
-    :target: (https://circleci.com/gh/travisjungroth/americano/tree/master
+    :target: https://circleci.com/gh/travisjungroth/americano/tree/master
 
 .. image:: https://coveralls.io/repos/github/travisjungroth/americano/badge.svg?branch=master
     :target: https://coveralls.io/github/travisjungroth/americano?branch=master
