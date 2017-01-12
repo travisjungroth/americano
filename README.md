@@ -45,3 +45,23 @@ See these links for algorithm details:
 
  * http://javascript.crockford.com/tdop/tdop.html
  * http://eli.thegreenplace.net/2010/01/02/top-down-operator-precedence-parsing/
+
+## Contributing
+Pull requests must be up-to-date with master, and only squash merges are allowed.
+
+The CI server checks:
+ * The tests pass on the supported versions of Python using tox
+ * Code coverage did not go down
+ * Linting with [prospector](https://github.com/landscapeio/prospector)
+    
+To duplicate locally:
+
+    pip install -r requirements/ci.txt
+    tox
+    prospector
+
+You can probably get by with just running on one version of Python and letting the CI server handle the rest:
+
+    pip install -r requirements/test.txt
+    pytest --cov=americano
+    prospector
