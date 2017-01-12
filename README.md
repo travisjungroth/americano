@@ -56,9 +56,8 @@ The CI server checks:
     
 To duplicate locally:
 
-    pip install -r requirements/ci.txt
+    pip install -r requirements/dev.txt
     tox
-    prospector
 
 You can probably get by with just running on one version of Python and letting the CI server handle the rest:
 
