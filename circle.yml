@@ -4,8 +4,4 @@ dependencies:
     - pyenv local 2.7.12 3.5.2
 test:
   override:
-    - tox
-  post:
-    - prospector
-    - py.test --cov=americano
-    - coveralls
+    - tox -e circleci
