@@ -47,6 +47,7 @@ See these links for algorithm details:
  * http://eli.thegreenplace.net/2010/01/02/top-down-operator-precedence-parsing/
 
 ## Contributing
+Check out the [issues](https://github.com/travisjungroth/americano/issues) to see what needs to be done. Consider opening an issue if you'd like to get feedback on your changes before you write them.
 ### Beginner
 #### Forking
 Follow [https://guides.github.com/activities/forking/](this guide) for forking the repository. Or, [this guide](http://kbroman.org/github_tutorial/pages/fork.html) if you're comfortable with the command line. 
