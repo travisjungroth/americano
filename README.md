@@ -47,14 +47,40 @@ See these links for algorithm details:
  * http://eli.thegreenplace.net/2010/01/02/top-down-operator-precedence-parsing/
 
 ## Contributing
+### Beginner
+#### Forking
+Follow [https://guides.github.com/activities/forking/](this guide) for forking the repository. Or, [this guide](http://kbroman.org/github_tutorial/pages/fork.html) if you're comfortable with the command line. 
+
+#### Making a Virtual Environment
+You should make a virtual environment to create and isolated install of Python. You can use [virtualenv](https://virtualenv.pypa.io/en/stable/), but your life will be easier if you use [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) or [autoenv](https://github.com/kennethreitz/autoenv).
+
+Once your virtual environment is active, install the requirements
+
+    pip install -r requirements/test.txt
+
+#### Running Tests
+
+    pytest
+    
+#### Checking Coverage
+
+    pytest --cov=americano
+
+#### Linting
+
+    prospector
+
+#### Opening a Pull Request
+
+### Experienced
 Pull requests must be up-to-date with master, and only squash merges are allowed.
 
 The CI server checks:
  * The tests pass on the supported versions of Python using tox
  * Code coverage did not go down
  * Linting with [prospector](https://github.com/landscapeio/prospector)
-    
-To duplicate locally:
+
+To duplicate locally
 
     pip install -r requirements/dev.txt
     tox
