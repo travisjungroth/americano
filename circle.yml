@@ -4,4 +4,4 @@ dependencies:
     - pyenv local 2.7.12 3.5.2
 test:
   override:
-    - tox -e circleci
+    - tox -ecircleci-py27,circleci-py35
