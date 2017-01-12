@@ -62,7 +62,7 @@ When you open a pull request, your code is automatically loaded onto a Continuou
  * Checks test coverage didn't go down
  * Analysis the python files for errors
  
- You PR will have warnings if any of these checks fail. You can save yourself time by doing these checks yourself before you open a pull request.
+Your PR will have warnings if any of these checks fail. You can save yourself time by doing these checks yourself before you open a pull request.
 
 #### Making a Virtual Environment
 You should make a virtual environment to create an isolated install of Python. You can use [virtualenv](https://virtualenv.pypa.io/en/stable/), but your life will be easier if you use [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) or [autoenv](https://github.com/kennethreitz/autoenv).
