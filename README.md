@@ -51,26 +51,41 @@ See these links for algorithm details:
 #### Forking
 Follow [https://guides.github.com/activities/forking/](this guide) for forking the repository. Or, [this guide](http://kbroman.org/github_tutorial/pages/fork.html) if you're comfortable with the command line. 
 
+#### Opening a Pull Request
+When you open a pull request, your code is automatically loaded onto a Continuous Integration (CI) server. 
+
 #### Making a Virtual Environment
-You should make a virtual environment to create and isolated install of Python. You can use [virtualenv](https://virtualenv.pypa.io/en/stable/), but your life will be easier if you use [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) or [autoenv](https://github.com/kennethreitz/autoenv).
+You should make a virtual environment to create an isolated install of Python. You can use [virtualenv](https://virtualenv.pypa.io/en/stable/), but your life will be easier if you use [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) or [autoenv](https://github.com/kennethreitz/autoenv).
 
 Once your virtual environment is active, install the requirements
 
     pip install -r requirements/test.txt
 
 #### Running Tests
+Americano uses [pytest](http://doc.pytest.org/en/latest/). The configuration is in `pytest.ini`, so you only need to run the test command. This will also run the doctests.
 
     pytest
     
 #### Checking Coverage
+To run the tests and see a coverage report:
 
     pytest --cov=americano
+    
+This uses [coverage](http://coverage.readthedocs.io/en/latest/) and [pytest-cov](http://pytest-cov.readthedocs.io/en/latest/).
+
+#### Testing Multiple Versions
+Calling `pytest` will test run the tests only against one version of Python. The CI server for Americano uses `tox` to test against all supported versions. To install multiple versions of Python, use [pyenv](https://github.com/yyuu/pyenv). Then, you can call tox and it will handle the testing just like the CI server.
+
+    tox
 
 #### Linting
+_Linting_ is doing an analysis of the code file to check for mistakes. Americano uses [http://prospector.landscape.io/en/master/](http://prospector.landscape.io/en/master/), which calls a variety of other linting tools and passes in reasonable defaults.
 
     prospector
 
-#### Opening a Pull Request
+
+
+
 
 ### Experienced
 Pull requests must be up-to-date with master, and only squash merges are allowed.
