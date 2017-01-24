@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='americano',
-    version='0.0.4',
+    version='0.0.5',
     packages=['americano'],
     license='MIT',
     install_requires=['six'],
@@ -13,5 +13,6 @@ setup(
     classifiers=[
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
 )

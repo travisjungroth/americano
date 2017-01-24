@@ -1,7 +1,7 @@
 dependencies:
   override:
     - pip install -r requirements/dev.txt
-    - pyenv local 2.7.12 3.5.2
+    - pyenv local 2.7.12 3.5.2 3.6.0
 test:
   override:
     - tox -ecircleci-py27,circleci-py35
