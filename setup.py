@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='americano',
-    version='0.0.5',
+    version='0.1.0',
     packages=['americano'],
     license='MIT',
     install_requires=['six'],
