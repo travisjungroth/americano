@@ -188,6 +188,7 @@ test_eval_parameters = [
     ['is_true(false)', False, {'is_true': lambda x: x is True}],
     ['true ? "a" : "b"', 'a'],
     ['false ? "a" : "b"', 'b'],
+    ['("a" !== undefined ? "a" : "")', 'a'],
 ]
 
 for parameter_list in test_eval_parameters:

@@ -268,6 +268,7 @@ class RootNode(BaseNode):
             merged_context['true'] = True
             merged_context['false'] = False
             merged_context['null'] = None
+            merged_context['undefined'] = None
             return self.child_node.eval(merged_context)
         except Exception as e:
             raise EvaluationError('Error evaluating expression {} with context {}: {}'.format(
