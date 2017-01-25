@@ -255,6 +255,16 @@ class ComputedAccessorNode(BaseNode):
         return obj[self.accessor_node.eval(context)]
 
 
+class MemberAccessorNode(BaseNode):
+    def __init__(self, object_node, accessor_node):
+        self.object_node = object_node
+        self.accessor_node = accessor_node
+
+    def eval(self, context):
+        obj = self.object_node.eval(context)
+        return obj[self.accessor_node.eval(context)]
+
+
 class RootNode(BaseNode):
     def __init__(self, expression_text, global_context, child_node):
         self.expression_text = expression_text
@@ -364,6 +374,15 @@ class UnaryNegationToken(BaseToken):
         return UnaryNegationNode(self.parser.expression(70))
 
 
+class MemberAccessToken(BaseToken):
+    lbp = 80
+
+    def led(self, left):
+        parsed = self.parser.expression(80)
+        key = LiteralNode(repr(parsed.name))
+        return MemberAccessorNode(left, key)
+
+
 class OpenParenToken(BaseToken):
     lbp = 80
 
@@ -406,7 +425,7 @@ class OpenBracketToken(BaseToken):
     def led(self, left):
         # Computed member accessor a[b]
         node = ComputedAccessorNode(left, self.parser.expression(0))
-        self.parser.advance(')')
+        self.parser.advance(']')
         return node
 
 
@@ -454,6 +473,7 @@ register_symbol('!', UnaryNegationToken)
 
 # Precedence 80: function invocation, array dereference
 # Note that ( and [ have null denotations for grouping and array literals respectively
+register_symbol('.', MemberAccessToken)
 register_symbol('(', OpenParenToken)
 register_symbol('[', OpenBracketToken)
 

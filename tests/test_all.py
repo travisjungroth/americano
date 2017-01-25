@@ -167,6 +167,15 @@ test_eval_parameters = [
     ['[1, 2] == [1, 2]', True],
     ['[1, 2] == var', True, {'var': [1, 2]}],
     ['[1, 2] == var', False, {'var': [0]}],
+    # Properties
+    ['a.b', 'c', {'a': {'b': 'c'}}],
+    ['a.b', 1, {'a': {'b': 1}}],
+    ['a.b + 1', 3, {'a': {'b': 2}}],
+    ['1 + a.b', 3, {'a': {'b': 2}}],
+    ['a["b"]', 'c', {'a': {'b': 'c'}}],
+    ['a["b"]', 1, {'a': {'b': 1}}],
+    ['a["b"] + 1', 3, {'a': {'b': 2}}],
+    ['1 + a["b"]', 3, {'a': {'b': 2}}],
     # Precedence
     ['3 + 4 - 2', 5],
     ['4 - 2 + 3', 5],
@@ -184,8 +193,10 @@ test_eval_parameters = [
     ['3 === 2 + 1', True],
     ['4 * (1 + 2)', 12],
     ['3 * (1 + (5 * 7))', 108],
+    # Functions
     ['is_true(true)', True, {'is_true': lambda x: x is True}],
     ['is_true(false)', False, {'is_true': lambda x: x is True}],
+    # Ternary operators
     ['true ? "a" : "b"', 'a'],
     ['false ? "a" : "b"', 'b'],
     ['("a" !== undefined ? "a" : "")', 'a'],
