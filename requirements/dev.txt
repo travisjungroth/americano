@@ -1,3 +1,4 @@
 -r test.txt
-tox == 2.3.2
-tox-pyenv == 1.0.3
+
+tox
+tox-pyenv

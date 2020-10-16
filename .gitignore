@@ -16,3 +16,5 @@ __pycache__/
 # Distribution / packaging
 *.egg-info/
 /dist
+/build
+/.vscode/
