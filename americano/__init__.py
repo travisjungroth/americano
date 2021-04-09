@@ -2,7 +2,6 @@ from abc import ABCMeta, abstractmethod
 from ast import literal_eval
 from datetime import date
 from numbers import Number
-from operator import ge, gt, le, lt
 import re
 from six import string_types
 
@@ -67,6 +66,96 @@ def js_number(val):
             return float(val)
     else:
         return val
+
+
+def ge(left, right):
+    if left is None and right is None:
+        return True
+    elif left is None or right is None:
+        if right is None:
+            if isinstance(left, string_types):
+                if left == "":
+                    return True
+                else:
+                    return False
+            else:
+                right = 0
+        if left is None:
+            if isinstance(right, string_types):
+                if right == "":
+                    return False
+            else:
+                left = 0
+    if isinstance(left, string_types) or isinstance(right, string_types):
+        return js_string(left) >= js_string(right)
+    else:
+        return js_number(left) >= js_number(right)
+
+
+def le(left, right):
+    if left is None and right is None:
+        return True
+    elif left is None or right is None:
+        if right is None:
+            if isinstance(left, string_types):
+                if left == "":
+                    return True
+                else:
+                    return False
+            else:
+                right = 0
+        if left is None:
+            if isinstance(right, string_types):
+                if right == "":
+                    return False
+            else:
+                left = 0
+    if isinstance(left, string_types) or isinstance(right, string_types):
+        return js_string(left) <= js_string(right)
+    else:
+        return js_number(left) <= js_number(right)
+
+
+def gt(left, right):
+    if left is None and right is None:
+        return False
+    elif left is None or right is None:
+        if right is None:
+            if isinstance(left, string_types):
+                return False
+            else:
+                right = 0
+        if left is None:
+            if isinstance(right, string_types):
+                if right == "":
+                    return False
+            else:
+                left = 0
+    if isinstance(left, string_types) or isinstance(right, string_types):
+        return js_string(left) > js_string(right)
+    else:
+        return js_number(left) > js_number(right)
+
+
+def lt(left, right):
+    if left is None and right is None:
+        return False
+    elif left is None or right is None:
+        if right is None:
+            if isinstance(left, string_types):
+                return False
+            else:
+                right = 0
+        if left is None:
+            if isinstance(right, string_types):
+                if right == "":
+                    return False
+            else:
+                left = 0
+    if isinstance(left, string_types) or isinstance(right, string_types):
+        return js_string(left) < js_string(right)
+    else:
+        return js_number(left) < js_number(right)
 
 
 def add(left, right):
@@ -481,7 +570,7 @@ register_symbol('[', OpenBracketToken)
 INPUT_TOKEN_PATTERNS = (
     ('name', (r'[a-zA-Z_$][a-zA-Z0-9_$]*',)),
     ('literal', (r'"(?:\\.|[^"])*"', r"'(?:\\.|[^'])*'", r'\d+\.\d+', r'\d+')),
-    ('ws', (r'\s+',))
+    ('ws', (r'\s+',)),
 )
 
 
@@ -502,7 +591,7 @@ class Parser(object):
         handlers = {
             'name': lambda text: VariableReferenceToken(self, text),
             'literal': lambda text: LiteralToken(self, text),
-            'operator': lambda text: SYMBOL_TABLE[text](self, text)
+            'operator': lambda text: SYMBOL_TABLE[text](self, text),
         }
 
         group_template = '(?P<{}>{})'
